@@ -18,7 +18,7 @@ pipeline {
             steps {
                 sshagent(['app-server-ssh']) {
                     sh """
-                    ssh ubuntu@$APP_SERVER '
+                    ssh -o StrictHostKeyChecking=no ubuntu@$APP_SERVER '
                       docker rm -f devops-app || true
                       docker run -d -p 8080:80 --name devops-app $IMAGE_NAME:latest
                     '
